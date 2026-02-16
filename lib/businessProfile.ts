@@ -153,3 +153,6 @@ export function getMissingRequiredFields(profile: BusinessProfile): string[] {
 
   return missing
 }
+export type Service = z.infer<typeof ServiceSchema>
+export type Testimonial = z.infer<typeof TestimonialSchema>
+
