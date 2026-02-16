@@ -1,4 +1,4 @@
-'use server'
+﻿'use server'
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -46,7 +46,7 @@ export async function updateCustomer(formData: FormData) {
 
   const id = formData.get('id') as string
 
-  const data: any = {
+  const data: unknown = {
     name: formData.get('name') as string,
     email: formData.get('email') as string,
     phone: formData.get('phone') as string,

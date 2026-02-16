@@ -1,4 +1,4 @@
-'use server'
+﻿'use server'
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -64,7 +64,7 @@ export async function updateJob(formData: FormData) {
   const id = formData.get('id') as string
   const customerId = formData.get('customer_id') as string
 
-  const data: any = {
+  const data: unknown = {
     title: formData.get('title') as string,
     description: formData.get('description') as string,
     estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost') as string) : null,
@@ -73,9 +73,9 @@ export async function updateJob(formData: FormData) {
 
   // Only include customer_id if it's not empty
   if (customerId && customerId !== '') {
-    data.customer_id = customerId
+    (data as any).customer_id = customerId
   } else {
-    data.customer_id = null
+    (data as any).customer_id = null
   }
 
   console.log('Updating job with data:', data)
@@ -110,13 +110,13 @@ export async function updateJobStatus(formData: FormData) {
   const id = formData.get('id') as string
   const status = formData.get('status') as string
 
-  const data: any = {
+  const data: unknown = {
     status: status,
   }
 
   // If status is completed, set end_date
   if (status === 'completed') {
-    data.end_date = new Date().toISOString()
+    (data as any).end_date = new Date().toISOString()
   }
 
   console.log('Updating job status:', data)
